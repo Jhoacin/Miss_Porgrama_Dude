@@ -1,0 +1,97 @@
+using System;
+using System.Threading;
+
+namespace ConsoleApp2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+			//Recolectamos los datos//
+			int sumatoria = 0;
+			string[] nombre = new string[20];
+			int cantidad = 0;
+			int[] edad = new int[20];
+			int cont1 = 0, cont2 = 0;
+			int moda;
+			
+			Console.WriteLine("    --    Programa que refleja el orden de edades n y la mediana de la misma     --      ");
+			Thread.Sleep(3000);
+			do
+			{
+				
+				Console.WriteLine("Ingrese su nombre");
+				nombre[cantidad] = Console.ReadLine();
+				Console.Clear();
+				Console.WriteLine("Ingrese su edad");
+				edad[cantidad] = int.Parse(Console.ReadLine());
+				Console.Clear();
+
+
+				sumatoria = sumatoria + edad[cantidad];
+				cantidad++;
+			} while (cantidad < 5);
+
+
+			Console.WriteLine(" ----  En automatico se ordenaran los datos de menor a mayor. por favor espere  --- ");
+			Thread.Sleep(3000);
+			//orden de edades de menor a mayor //
+			for (int i = 0; i < 5; i++)
+			{
+				for (int A = i + 1; A < 5; A++)
+				{
+					int cambio;
+					string Ncam;
+					if (edad[i] > edad[A])
+					{
+						cambio = edad[i];
+						Ncam = nombre[i];
+
+						edad[i] = edad[A];
+						nombre[i] = nombre[A];
+
+						edad[A] = cambio;
+						nombre[A] = Ncam;
+						Console.Clear();
+					}
+				}
+			}
+			Console.WriteLine("Datos ordenados");
+			for (int i = 0; i < 5; i++)
+			{
+				Console.WriteLine(nombre[i] + " con " + edad[i] + " años. ");
+			}
+			Console.ReadKey();
+
+			//mediana//
+			int n = 5;
+			Console.WriteLine("Se reflejará la media aritmetica de los datos obtenidos, por favor espere... ");
+			Thread.Sleep(3000);
+			Console.WriteLine("Media aritmetica: " + edad[(n + 1) / 2]);
+			Console.ReadKey();
+
+			
+			// moda//
+			for (int E = 0; E < 5; E++)
+            {
+				for (int j = 0; j < 5; j++)
+				{
+					if (edad[E] == edad[j]  && E != j) cont1++;
+                }
+
+				if (cont1 > cont2) 
+				{
+					cont2 = cont1;
+					moda = edad[E];
+				}
+				cont1 = 0;
+
+
+            }
+			Console.WriteLine("Por ultimo reflejará la moda, por favor espere... ");
+			Thread.Sleep(3000);
+			Console.WriteLine($"La moda es: {moda} ,Que fue el valor que mas se repitio");
+			Console.ReadKey(true);		     
+		}
+    }
+}
